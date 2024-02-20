@@ -1,0 +1,39 @@
+﻿Сборка начата 18.02.2024 12:49:58.
+Уровень детализации журнала: Normal.     1>Проект "D:\4sem\уник\МатПрога\MP\Lab_02\Lab_02\Lab_02.vcxproj" в узле 2 (целевые объекты Build).
+     1>D:\Professional\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(531,5): warning MSB8028: промежуточный каталог (x64\Debug\) содержит файлы, которые используются совместно с другим проектом (Lab_02.vcxproj).  Это может привести к ошибкам очистки и перестроения.
+         Создание каталога "x64\Debug\Lab_02(task 1).tlog\".
+     1>InitializeBuildStatus:
+         Создание "x64\Debug\Lab_02(task 1).tlog\unsuccessfulbuild", так как было задано "AlwaysCreate".
+         Обращение к "x64\Debug\Lab_02(task 1).tlog\unsuccessfulbuild".
+       ClCompile:
+         D:\Professional\VC\Tools\MSVC\14.37.32822\bin\HostX64\x64\CL.exe /c /ZI /JMC /nologo /W3 /WX- /diagnostics:column /sdl /Od /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /permissive- /Fo"x64\Debug\\" /Fd"x64\Debug\vc143.pdb" /external:W3 /Gd /TP /FC /errorReport:prompt Combi.cpp Lab_02.cpp
+         Combi.cpp
+     1>D:\4sem\уник\МатПрога\MP\Lab_02\Lab_02\Combi.cpp(40,37): warning C4334: <<: результат 32-разрядного смещения неявно преобразуется в 64-разрядное значение (предполагалось 64-разрядное смещение?)
+         Lab_02.cpp
+         Создание кода...
+       Link:
+         D:\Professional\VC\Tools\MSVC\14.37.32822\bin\HostX64\x64\link.exe /ERRORREPORT:PROMPT /OUT:"D:\4sem\уник\МатПрога\MP\Lab_02\Lab_02\x64\Debug\Lab_02(task 1).exe" /INCREMENTAL /ILK:"x64\Debug\Lab_02(task 1).ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:\4sem\уник\МатПрога\MP\Lab_02\Lab_02\x64\Debug\Lab_02(task 1).pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\4sem\уник\МатПрога\MP\Lab_02\Lab_02\x64\Debug\Lab_02(task 1).lib" /MACHINE:X64 x64\Debug\Combi.obj
+         x64\Debug\Lab_02.obj
+         Lab_02.vcxproj -> D:\4sem\уник\МатПрога\MP\Lab_02\Lab_02\x64\Debug\Lab_02(task 1).exe
+       IncrementalClean:
+         Файл "D:\4sem\уник\МатПрога\MP\Lab_02\Lab_02\x64\Debug\Lab_02.exe" удаляется.
+       FinalizeBuildStatus:
+         Файл "x64\Debug\Lab_02(task 1).tlog\unsuccessfulbuild" удаляется.
+         Обращение к "x64\Debug\Lab_02(task 1).tlog\Lab_02(task 1).lastbuildstate".
+     1>Сборка проекта "D:\4sem\уник\МатПрога\MP\Lab_02\Lab_02\Lab_02.vcxproj" завершена (целевые объекты Build).
+
+Сборка успешно завершена.
+
+       "D:\4sem\уник\МатПрога\MP\Lab_02\Lab_02\Lab_02.vcxproj" (целевой объект Build ) (1) ->
+       (Целевой объект PrepareForBuild) -> 
+         D:\Professional\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(531,5): warning MSB8028: промежуточный каталог (x64\Debug\) содержит файлы, которые используются совместно с другим проектом (Lab_02.vcxproj).  Это может привести к ошибкам очистки и перестроения.
+
+
+       "D:\4sem\уник\МатПрога\MP\Lab_02\Lab_02\Lab_02.vcxproj" (целевой объект Build ) (1) ->
+       (Целевой объект ClCompile) -> 
+         D:\4sem\уник\МатПрога\MP\Lab_02\Lab_02\Combi.cpp(40,37): warning C4334: <<: результат 32-разрядного смещения неявно преобразуется в 64-разрядное значение (предполагалось 64-разрядное смещение?)
+
+    Предупреждений: 2
+    Ошибок: 0
+
+Прошло времени 00:00:01.16
