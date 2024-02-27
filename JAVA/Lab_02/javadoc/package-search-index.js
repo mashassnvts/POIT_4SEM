@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"by.bestu.it.Sosnovets"},{"l":"by.bestu.it.Sosnovets.basejava"}];updateSearchResults();

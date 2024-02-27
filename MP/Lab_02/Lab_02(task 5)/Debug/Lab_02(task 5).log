@@ -1,0 +1,39 @@
+﻿Сборка начата 18.02.2024 17:39:26.
+Уровень детализации журнала: Normal.     1>Проект "D:\4sem\уник\МатПрога\MP\Lab_02\Lab_02(task 5)\Lab_02(task 5).vcxproj" в узле 2 (целевые объекты Build).
+     1>PrepareForBuild:
+         Создание каталога "D:\4sem\уник\МатПрога\MP\Lab_02\Lab_02\Debug\".
+         Создание каталога "Debug\Lab_02(task 5).tlog\".
+       InitializeBuildStatus:
+         Создание "Debug\Lab_02(task 5).tlog\unsuccessfulbuild", так как было задано "AlwaysCreate".
+         Обращение к "Debug\Lab_02(task 5).tlog\unsuccessfulbuild".
+       ClCompile:
+         D:\Professional\VC\Tools\MSVC\14.37.32822\bin\HostX86\x86\CL.exe /c /ZI /JMC /nologo /W3 /WX- /diagnostics:column /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /permissive- /Fo"Debug\\" /Fd"Debug\vc143.pdb" /external:W3 /Gd /TP /analyze- /FC /errorReport:prompt Auxil.cpp Boat.cpp Combi.cpp "Lab_02(task 5).cpp" pch.cpp
+         Auxil.cpp
+         Boat.cpp
+         Combi.cpp
+     1>D:\4sem\уник\МатПрога\MP\Lab_02\Lab_02(task 5)\Combi.cpp(38,65): warning C4334: <<: результат 32-разрядного смещения неявно преобразуется в 64-разрядное значение (предполагалось 64-разрядное смещение?)
+         Lab_02(task 5).cpp
+         pch.cpp
+         Создание кода...
+       Link:
+         D:\Professional\VC\Tools\MSVC\14.37.32822\bin\HostX86\x86\link.exe /ERRORREPORT:PROMPT /OUT:"D:\4sem\уник\МатПрога\MP\Lab_02\Lab_02\Debug\Lab_02(task 5).exe" /INCREMENTAL /ILK:"Debug\Lab_02(task 5).ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:\4sem\уник\МатПрога\MP\Lab_02\Lab_02\Debug\Lab_02(task 5).pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\4sem\уник\МатПрога\MP\Lab_02\Lab_02\Debug\Lab_02(task 5).lib" /MACHINE:X86 Debug\Auxil.obj
+         Debug\Boat.obj
+         Debug\Combi.obj
+         "Debug\Lab_02(task 5).obj"
+         Debug\pch.obj
+         Lab_02(task 5).vcxproj -> D:\4sem\уник\МатПрога\MP\Lab_02\Lab_02\Debug\Lab_02(task 5).exe
+       FinalizeBuildStatus:
+         Файл "Debug\Lab_02(task 5).tlog\unsuccessfulbuild" удаляется.
+         Обращение к "Debug\Lab_02(task 5).tlog\Lab_02(task 5).lastbuildstate".
+     1>Сборка проекта "D:\4sem\уник\МатПрога\MP\Lab_02\Lab_02(task 5)\Lab_02(task 5).vcxproj" завершена (целевые объекты Build).
+
+Сборка успешно завершена.
+
+       "D:\4sem\уник\МатПрога\MP\Lab_02\Lab_02(task 5)\Lab_02(task 5).vcxproj" (целевой объект Build ) (1) ->
+       (Целевой объект ClCompile) -> 
+         D:\4sem\уник\МатПрога\MP\Lab_02\Lab_02(task 5)\Combi.cpp(38,65): warning C4334: <<: результат 32-разрядного смещения неявно преобразуется в 64-разрядное значение (предполагалось 64-разрядное смещение?)
+
+    Предупреждений: 1
+    Ошибок: 0
+
+Прошло времени 00:00:04.67
