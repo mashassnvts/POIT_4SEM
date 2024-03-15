@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<java version="17.0.10" class="java.beans.XMLDecoder">
+ <object class="Sosnovets.bstu.team.Admin" id="Admin0">
+  <void class="Sosnovets.bstu.human.Human" method="getField">
+   <string>name</string>
+   <void method="set">
+    <object idref="Admin0"/>
+    <string>Ксения</string>
+   </void>
+  </void>
+  <void class="Sosnovets.bstu.human.Human" method="getField">
+   <string>age</string>
+   <void method="set">
+    <object idref="Admin0"/>
+    <int>34</int>
+   </void>
+  </void>
+  <void property="salary">
+   <float>1222.2</float>
+  </void>
+ </object>
+</java>
