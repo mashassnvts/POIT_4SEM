@@ -13,8 +13,13 @@ interface MyPosition{
 }
 
 interface MyPositionWidthDefault extends MyPosition{
-    default: string
+    default?: string
 }
+
+// const mypos: MyPosition = {
+//     x: undefined,
+//     y: undefined
+// }
 
 function position(): MyPosition
 function position(a: number): MyPositionWidthDefault
