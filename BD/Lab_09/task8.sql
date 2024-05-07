@@ -1,0 +1,8 @@
+DECLARE @A INT = 3
+WHILE @A < 10
+BEGIN
+PRINT @A
+SET @A=@A+2
+IF (@A > 9) 
+RETURN
+END
