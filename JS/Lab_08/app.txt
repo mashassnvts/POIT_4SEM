@@ -1,0 +1,141 @@
+Пропсы — это данные, доступные только для чтения, 
+которые передаются от родительского компонента дочернему компоненту. 
+Они используются для настройки поведения и внешнего вида компонента.
+
+
+Хуки — это функции, с помощью которых вы можете «подцепиться» к состоянию и методам жизненного цикла React из функциональных компонентов
+
+useState() — это хук, который предназначен для работы с состоянием компонента в приложениях на React 
+и работает только в функциональных компонентах
+
+
+
+Данный хук используется для:
+
+управления состоянием, в том числе передачи данных как пропсов другим компонентам
+условного рендеринга — рендер тех или иных данных, в зависимости от того, что хранится в стейте
+для переключения состояния (true/false)
+как счетчик чего-либо
+хранения данных полученных от сервера
+
+
+Хук useState() возвращает состояние (state) и функцию для его изменения (setState). Название данной функции и переменной задаете вы сами. 
+
+
+
+
+import React, { useState } from 'react';
+import './App.css'; 
+//импортирует два модуля из библиотеки React. 
+//React - это основной модуль React, который нужен для создания React-компонентов. /
+//useState - это хук React, который позволяет добавлять состояние к функциональным компонентам.
+//Хуки — это функции, с помощью которых вы можете «подцепиться» к состоянию и методам жизненного цикла React из функциональных компонентов.
+type BtnProps = {//св-ва кнопки
+    title: string;//заголовок
+    onClick: () => void;//обработчик события клика
+    disabled: boolean;//флаг, указывающий, должна ли быть кнопка отключена
+};
+//тип компонента React, который используется для определения функциональных компонентов в React
+const Button:React.FC<BtnProps> = (props) => {//определение компанента кнопки 
+  return (//Он принимает аргумент props с типом BtnProps, который мы определили выше. Возвращаемый JSX представляет собой кнопку, 
+  //которая отображает переданный title, имеет обработчик события клика и может быть отключена в зависимости от значения disabled
+    <button onClick={props.onClick} disabled={props.disabled}>{props.title}</button>
+  );
+};
+
+
+const Counter: React.FC = () => {//пределение компонента счетчика, внутри определено состояние хука
+  const [count, setCount] = useState<number>(0);//Вызов useState возвращает массив с двумя элементами, который содержит: текущее значение состояния и функцию для его обновления.
+
+  const increaseCount = () => {//Это функция, которая увеличивает значение счетчика на 1, если оно меньше 5.
+    if (count < 5) {
+      setCount(count + 1);
+    }
+  };
+
+  const resetCount = () => {//Это функция, которая сбрасывает значение счетчика обратно в 0.
+    setCount(0);
+  };
+
+
+//это атрибут JSX, который определяет CSS-класс элемента. Здесь используется тернарный оператор для проверки условия: 
+//если count равен 5, то класс будет 'red', иначе будет пустая строка. Если count равен 5, то заголовок будет иметь класс 'red', 
+//который, вероятно, определен в CSS и задает красный цвет текста.
+  return (
+    <div className='counter'>
+      <h1 className={count === 5 ? 'red': ''}>{count}</h1>
+      <Button title="inc" onClick={increaseCount} disabled={count === 5} />
+      <Button title="reset" onClick={resetCount} disabled={count === 0} />
+    </div>
+  );
+};
+
+export default Counter;
+
+
+
+
+
+
+
+  const [squareColor, setsquareColor] = useState<string>('');
+
+
+  const changeColor = () =>{
+    setsquareColor(squareColor === 'red' ? 'blue' : 'red');
+  }
+
+   <div className='square' style={{backgroundColor: squareColor}}></div>
+      <Button title='chahme' onClick={changeColor} disabled={count===1}/>
+
+
+
+const [numbers, setNumbers] = useState<number[]>([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
+
+ЧЕТНЫЕ
+  const removeEvenNumber = () => {
+    const newNumbers = numbers.filter(num => num % 2 !== 0);
+    setNumbers(newNumbers);
+  };
+
+НЕЧЕТ
+  const removeEvenNumber = () => {
+    const newNumbers = numbers.filter(num => num % 2 == 0);
+    setNumbers(newNumbers);
+  };   
+
+   <Button title="Remove" onClick={removeEvenNumber} disabled={numbers.filter(num => num % 2 === 0).length === 0} />
+      <div>{numbers.join(' ')}</div>
+
+
+
+
+const [words, setWords] = useState<string[]>(["apple", "banana", "cherry", "date", "elderberry"]);
+
+
+  const removeWord = () => {
+    if (words.length > 0) {
+      const newWords = [...words];
+      newWords.pop(); // Удаляем последнее слово из массива
+      setWords(newWords);
+    }
+  };
+
+
+    <Button title="Remove One Word" onClick={removeWord} disabled={words.length === 0} />
+      <div>
+        {words.join(' ')}
+      </div>
+
+
+
+
+
+       const [inputText, setInputText] = useState<string>('');
+         const handleButtonClick = () => {
+    setInputText('Text from button click');
+  };
+
+
+    <Button title="Show Text" onClick={handleButtonClick} disabled={false} />
+      <input type="text" value={inputText} readOnly />
