@@ -1,0 +1,300 @@
+import React, { useState } from "react";
+import SearchBar from "./SearchBar"; 
+import ProductTable from "./ProductTable"; 
+import Product from "./Product"; 
+
+interface filterableProductTableProps {
+    products: Product[]; // Массив продуктов типа Product
+}
+
+// Объявление функционального компонента FilterableProductTable
+function FilterableProductTable({ products }: filterableProductTableProps) {
+    // Использование хуков useState для добавления состояния в компонент
+    const [filterText, setFilterText] = useState(''); // Состояние текста фильтрации
+    const [inStockOnly, setInStockOnly] = useState(false); // Состояние флажка "только в наличии"
+
+    // Функция обработки изменения текста фильтрации
+    const handleFilterTextChange = (filterText: string) => {
+        setFilterText(filterText); // Обновление состояния filterText
+    };
+
+    // Функция обработки изменения флажка "только в наличии"
+    const handleInStockChange = (inStockOnly: boolean) => {
+        setInStockOnly(inStockOnly); // Обновление состояния inStockOnly
+    };
+
+    // Возвращение JSX, который содержит SearchBar и ProductTable с передачей им соответствующих свойств
+    return (
+        <div>
+            {/* Компонент SearchBar с передачей ему соответствующих свойств */}
+            <SearchBar 
+                filterText={filterText} // Текущий текст фильтрации
+                isStockOnly={inStockOnly} // Флажок "только в наличии"
+                onFilterTextChange={handleFilterTextChange} // Обработчик изменения текста фильтрации
+                onInStockChange={handleInStockChange} // Обработчик изменения флажка "только в наличии"
+            />
+            {/* Компонент ProductTable с передачей ему соответствующих свойств */}
+            <ProductTable 
+                products={products} // Массив продуктов
+                isStockOnly={inStockOnly} // Флажок "только в наличии"
+                filterText={filterText} // Текущий текст фильтрации
+            />
+        </div>
+    );
+}
+
+// Экспорт компонента FilterableProductTable для его использования в других частях приложения
+export default FilterableProductTable;
+
+
+
+
+
+// Импорт необходимых компонентов и типов из библиотеки React
+import React, { ChangeEvent } from "react";
+
+// Определение интерфейса свойств компонента SearchBar
+interface SearchBarProps {
+    filterText: string; // Текст фильтрации
+    isStockOnly: boolean; // Флажок "только в наличии"
+    onFilterTextChange: Function; // Обработчик изменения текста фильтрации
+    onInStockChange: Function; // Обработчик изменения флажка "только в наличии"
+}
+
+// Объявление функционального компонента SearchBar
+function SearchBar(props: SearchBarProps) {
+    // Обработчик изменения текста фильтрации
+    const handleFilterTextChange = (event: ChangeEvent<HTMLInputElement>) => {
+        console.log("hello"); // Вывод в консоль приветствия
+        props.onFilterTextChange(event.target.value); // Вызов функции обратного вызова onFilterTextChange с новым значением текста фильтрации
+    };
+
+    // Обработчик изменения флажка "только в наличии"
+    const handleInStockChange = (event: ChangeEvent<HTMLInputElement>) => {
+        props.onInStockChange(event.target.checked); // Вызов функции обратного вызова onInStockChange с новым значением флажка "только в наличии"
+    };
+
+    // Возвращение JSX, который содержит форму с полем ввода и флажком
+    return (
+        <form>
+            {/* Поле ввода для фильтрации событий */}
+            <input 
+                type="text" 
+                placeholder="Search..." 
+                value={props.filterText} // Значение поля ввода равно текущему тексту фильтрации
+                onChange={handleFilterTextChange} // Обработчик изменения текста фильтрации
+            />
+            {/* Флажок для фильтрации только по продуктам в наличии */}
+            <p>
+                <input 
+                    type="checkbox" 
+                    onChange={handleInStockChange} // Обработчик изменения флажка "только в наличии"
+                />
+                {' '}
+                Only show products in stock
+            </p>
+        </form>
+    );
+}
+
+// Экспорт компонента SearchBar для его использования в других частях приложения
+export default SearchBar;
+
+
+
+
+
+// Импорт необходимых компонентов и типов из библиотеки React и локальных файлов
+import React from "react";
+import ProductRow from "./ProductRow"; // Импорт компонента строки продукта
+import ProductCategoryRow from "./ProductCategoryRow"; // Импорт компонента строки категории продукта
+import Product from "./Product"; // Импорт типа Product
+
+// Определение интерфейса свойств компонента ProductTable
+interface ProductTableProps {
+    products: Product[]; // Массив продуктов
+    isStockOnly: boolean; // Флажок "только в наличии"
+    filterText: string; // Текст фильтрации
+}
+
+// Объявление функционального компонента ProductTable
+function ProductTable(props: ProductTableProps) {
+    // Массив для хранения JSX элементов строк продуктов и категорий
+    const rows: JSX.Element[] = [];
+    let lastCategory: string = ""; // Последняя обработанная категория
+
+    // Получение значений фильтрации из свойств
+    let filterText = props.filterText;
+    let inStockOnly = props.isStockOnly;
+
+    // Итерация по массиву продуктов для формирования строк и категорий
+    props.products.forEach((product) => {
+        // Проверка, соответствует ли продукт тексту фильтрации
+        if (product.name.indexOf(filterText) === -1) {
+            return; // Пропустить текущую итерацию, если не соответствует
+        }
+
+        // Проверка, должны ли отображаться только продукты в наличии и есть ли продукт в наличии
+        if (inStockOnly && !product.stocked) {
+            return; // Пропустить текущую итерацию, если нужно отображать только в наличии и продукта нет в наличии
+        }
+
+        // Проверка, относится ли текущий продукт к новой категории
+        if (product.category !== lastCategory) {
+            // Добавление компонента строки категории в массив строк
+            rows.push(
+                <ProductCategoryRow 
+                    category={product.category} // Название категории
+                    key={product.category} // Ключ для уникальной идентификации элемента
+                />
+            );
+        }
+
+        // Добавление компонента строки продукта в массив строк
+        rows.push(
+            <ProductRow 
+                product={product} // Текущий продукт
+                key={product.name} // Ключ для уникальной идентификации элемента
+            />
+        );
+
+        // Обновление последней категории
+        lastCategory = product.category;
+    });
+
+    // Возвращение JSX, который содержит таблицу с заголовками и строками продуктов
+    return (
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                {rows} {/* Вывод строк продуктов и категорий */}
+            </tbody>
+        </table>
+    );
+}
+
+// Экспорт компонента ProductTable для его использования в других частях приложения
+export default ProductTable;
+
+
+
+
+
+
+
+// Импорт необходимых компонентов и типов из библиотеки React
+import React from "react";
+
+// Определение интерфейса свойств компонента ProductCategoryRow
+interface ProductCategoryRowProps {
+    category: string; // Название категории продуктов
+}
+
+// Объявление функционального компонента ProductCategoryRow
+function ProductCategoryRow({ category }: ProductCategoryRowProps) {
+    // Возвращение JSX, который содержит строку с названием категории
+    return (
+        <tr>
+            <th colSpan={2}>
+                {category} {/* Вывод названия категории */}
+            </th>
+        </tr>
+    );
+}
+
+// Экспорт компонента ProductCategoryRow для его использования в других частях приложения
+export default ProductCategoryRow;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Импорт необходимых компонентов и типов из библиотеки React
+import React from "react";
+import Product from "./Product"; // Импорт типа Product
+
+// Определение интерфейса свойств компонента ProductRow
+interface ProductRowProps {
+    product: Product; // Продукт для отображения в строке
+}
+
+// Объявление функционального компонента ProductRow
+function ProductRow({ product }: ProductRowProps) {
+    // Создание переменной name, которая содержит название продукта
+    const name = product.stocked ? ( // Если продукт в наличии
+        product.name // Выводим название продукта
+    ) : ( // Иначе (если продукт не в наличии)
+        <span style={{ color: 'red' }}>{product.name}</span> // Выводим название продукта красным цветом
+    );
+
+    // Возвращение JSX, который содержит строку с данными о продукте
+    return (
+        <tr>
+            <td>{name}</td> {/* Вывод названия продукта */}
+            <td>{product.price}</td> {/* Вывод цены продукта */}
+        </tr>
+    );
+}
+
+// Экспорт компонента ProductRow для его использования в других частях приложения
+export default ProductRow;
+
+
+
+
+
+// Импорт необходимых компонентов и файлов стилей
+import React from 'react';
+import logo from './logo.svg'; // Логотип приложения
+import './App.css'; // Файл стилей приложения
+import FilterableProductTable from "./FilterableProductTable"; // Импорт компонента FilterableProductTable
+
+// Объявление функции компонента App
+function App() {
+  // Массив объектов продуктов для отображения в таблице
+  const PRODUCTS = [
+    {category: 'Sporting Goods', price: '$49.99', stocked: true, name: 'Football'},
+    {category: 'Sporting Goods', price: '$9.99', stocked: true, name: 'Baseball'},
+    {category: 'Sporting Goods', price: '$29.99', stocked: false, name: 'Basketball'},
+    {category: 'Electronics', price: '$99.99', stocked: true, name: 'iPod Touch'},
+    {category: 'Electronics', price: '$399.99', stocked: false, name: 'iPhone 5'},
+    {category: 'Electronics', price: '$199.99', stocked: true, name: 'Nexus 7'}
+  ];
+
+  // Возвращение JSX, который содержит компонент FilterableProductTable с передачей ему списка продуктов
+  return (
+    <div className="App">
+      <FilterableProductTable products={PRODUCTS}/> {/* Компонент FilterableProductTable */}
+    </div>
+  );
+}
+
+// Экспорт компонента App для его использования в других частях приложения
+export default App;
+
+
+
+
+
+interface Product {
+    name: string;
+    price: string;
+    stocked: boolean;
+    category:string;
+}
+export default Product
