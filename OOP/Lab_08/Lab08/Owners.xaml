@@ -1,0 +1,28 @@
+﻿<Window x:Class="Lab08.Owners"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Lab08"
+        mc:Ignorable="d"
+        Title="Owners" Height="670" Width="280" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Background="pink" Loaded="Window_Loaded">
+    <Grid Margin="0,0,-48,0">
+        <StackPanel Orientation="Vertical" Margin="0,0,58,0">
+            <TextBlock Text="Id:" HorizontalAlignment="Center"/>
+            <TextBox x:Name="Id" Margin="25,0,25,25" PreviewTextInput="Id_PreviewTextInput"/>
+            <TextBlock Text="Счет:" HorizontalAlignment="Center"/>
+            <ComboBox x:Name="Bill" Margin="25,0,25,25"/>
+            <TextBlock Text="Имя:" HorizontalAlignment="Center"/>
+            <TextBox x:Name="Name" Margin="25,0,25,25" PreviewTextInput="Name_PreviewTextInput"/>
+            <TextBlock Text="Фамилия:" HorizontalAlignment="Center"/>
+            <TextBox x:Name="Second_name" Margin="25,0,25,25" PreviewTextInput="Second_name_PreviewTextInput"/>
+            <TextBlock Text="Адрес:" HorizontalAlignment="Center"/>
+            <TextBox x:Name="Adress_number" Margin="25,0,25,25"/>
+            <TextBlock Text="Номер телефона:" HorizontalAlignment="Center"/>
+            <TextBox x:Name="Phone_number" Margin="25,0,25,25" PreviewTextInput="Phone_number_PreviewTextInput"/>
+            <Button Click="Button_Click"  Foreground="White" FontWeight="Bold" Background="#FFFF4CE0" Content="Загрузить фото" Margin="25,0,25,25" Height="28"/>
+            <Image x:Name="imgDynamic" Height="131" Width="129" />
+            <Button Content="Сохранить" Margin="25,25,25,25"  Foreground="White" FontWeight="Bold" Background="#FFFF4CE0" Click="Button_Click1" Height="34"/>
+        </StackPanel>
+    </Grid>
+</Window>

@@ -1,0 +1,57 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net5.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <ApplicationIcon>images\Untitled - 69.ico</ApplicationIcon>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="images\bloom.jpg" />
+    <None Remove="images\darcy.jpg" />
+    <None Remove="images\flora.jpg" />
+    <None Remove="images\icy.jpg" />
+    <None Remove="images\kiko.cur" />
+    <None Remove="images\muse.jpg" />
+    <None Remove="images\stormy.jpg" />
+    <None Remove="images\teckna.jpg" />
+    <None Remove="maxresdefault.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="images\Untitled - 69.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.5" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="images\bloom.jpg" />
+    <Resource Include="images\darcy.jpg" />
+    <Resource Include="images\flora.jpg" />
+    <Resource Include="images\icy.jpg" />
+    <Resource Include="images\kiko.cur" />
+    <Resource Include="images\muse.jpg" />
+    <Resource Include="images\stormy.jpg" />
+    <Resource Include="images\teckna.jpg" />
+    <Resource Include="maxresdefault.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Properties\Settings.Designer.cs">
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+
+</Project>
