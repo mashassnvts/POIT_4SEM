@@ -1,0 +1,118 @@
+USE UNIVER;
+
+GO
+CREATE FUNCTION COUNT_STUDENTS (@faculty VARCHAR(20)) RETURNS INT
+AS BEGIN DECLARE @rc INT = 0;
+SET @rc = (SELECT COUNT(*) FROM STUDENT AS STUD
+JOIN GROUPS AS GR ON STUD.IDGROUP = GR.IDGROUP
+JOIN FACULTY AS FAC ON GR.FACULTY = FAC.FACULTY
+WHERE FAC.FACULTY = @faculty);
+RETURN @rc;
+END;
+
+DROP FUNCTION COUNT_STUDENTS;
+GO
+
+DECLARE @f INT = dbo.COUNT_STUDENTS('ХТиТ');
+PRINT 'COUNT STUDENTS = ' + CAST(@f AS VARCHAR(4))
+
+
+ALTER FUNCTION COUNT_STUDENTS(
+@faculty VARCHAR(20),
+@prof VARCHAR(20)) RETURNS INT
+AS BEGIN DECLARE @rc INT = 0;
+SET @rc = (SELECT COUNT(*) FROM STUDENT AS STUD
+JOIN GROUPS AS GR ON STUD.IDGROUP = GR.IDGROUP
+JOIN FACULTY AS FAC ON FAC.FACULTY = GR.FACULTY
+JOIN PROFESSION AS PROF ON PROF.PROFESSION = GR.PROFESSION
+WHERE FAC.FACULTY = @faculty AND (PROF.PROFESSION_NAME = @prof));
+RETURN @rc;
+END;
+
+DECLARE @ff INT = dbo.COUNT_STUDENTS('ХТиТ', 'Машины и аппараты химических производств и предприятий строительных материалов');
+PRINT 'COUNT STUDENT = ' + CAST(@ff AS VARCHAR(4));
+
+
+
+-------------------------------------
+CREATE FUNCTION FSUBJECTS(@p VARCHAR(20)) RETURNS VARCHAR(300)
+AS BEGIN DECLARE @tv CHAR(20);
+DECLARE @t VARCHAR(300) = 'ПЕРЕЧЬ ДИСЦИПЛИН:';
+DECLARE CUR CURSOR LOCAL
+FOR SELECT SUBJECT FROM SUBJECT AS SUBB
+JOIN PULPIT AS PUL ON SUBB.PULPIT = PUL.PULPIT
+WHERE PUL.PULPIT = @p
+OPEN CUR
+FETCH CUR INTO @tv
+WHILE @@FETCH_STATUS = 0 
+BEGIN
+SET @t = @t + ',' + RTRIM(@tv);
+FETCH CUR INTO @tv
+END
+RETURN @t;
+END;
+GO
+
+SELECT PULPIT, dbo.FSUBJECTS(PULPIT) FROM PULPIT
+
+DROP FUNCTION FSUBJECTS
+
+
+
+
+------------------------------------------------------
+CREATE FUNCTION FFACPUL (@fac VARCHAR(10), @pul VARCHAR(10)) RETURNS TABLE
+AS RETURN
+SELECT FACULTY.FACULTY, PULPIT.PULPIT FROM FACULTY LEFT OUTER JOIN PULPIT
+ON FACULTY.FACULTY = PULPIT.FACULTY
+WHERE FACULTY.FACULTY = ISNULL (@fac, FACULTY.FACULTY)
+AND
+PULPIT.PULPIT = ISNULL(@pul, PULPIT.PULPIT);
+GO
+
+DROP FUNCTION IF EXISTS FFACPUL
+GO
+
+SELECT * FROM dbo.FFACPUL(NULL,NULL);
+SELECT * FROM dbo.FFACPUL('ТДП',NULL);
+SELECT * FROM dbo.FFACPUL(NULL,'ИСиТ');
+
+
+
+------------------------------------
+DROP FUNCTION IF EXISTS FCTEACHER
+GO
+
+CREATE FUNCTION FCTEACHER (@c VARCHAR(10)) RETURNS INT
+AS BEGIN DECLARE @rc INT = (SELECT COUNT(*) FROM TEACHER
+WHERE PULPIT = ISNULL(@c, PULPIT));
+RETURN @rc;
+END;
+GO
+
+SELECT PULPIT, dbo.FCTEACHER(PULPIT) [COUNT TEACHER] FROM PULPIT;
+SELECT dbo.FCTEACHER('ЛВ')[ISIT], dbo.FCTEACHER(NULL)[ВСЕГО]
+
+
+
+---------------------------------
+go
+create function FACULTY_REPORT(@c int) returns @fr table
+( [Факультет] varchar(50), [Количество кафедр] int, [Количество групп]  int, 
+[Количество студентов] int, [Количество специальностей] int )
+as begin 
+declare cc CURSOR static for 
+select FACULTY from FACULTY 
+where dbo.COUNT_STUDENTS2(FACULTY, default) > @c; 
+declare @f varchar(30);
+open cc;  
+fetch cc into @f;
+while @@fetch_status = 0
+begin
+insert @fr values( @f,  (select count(PULPIT) from PULPIT where FACULTY = @f),
+(select count(IDGROUP) from GROUPS where FACULTY = @f),   dbo.COUNT_STUDENTS2(@f, default),
+(select count(PROFESSION) from PROFESSION where FACULTY = @f)   ); 
+fetch cc into @f;  
+end;   
+return; 
+end;
